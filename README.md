@@ -1,5 +1,7 @@
 Please cite: 
 
+To be completed.
+
 # Installation 
 ```{r}
 devtools::install_packages(bisilhouette)
