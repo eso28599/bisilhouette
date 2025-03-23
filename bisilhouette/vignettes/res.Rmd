@@ -1,0 +1,84 @@
+---
+title: "Bisilhouette"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Bisilhouette}
+  %\VignetteEngine{knitr::rmarkdown}
+  \usepackage[utf8]{inputenc}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(bisilhouette)
+```
+
+
+The bisilhouette score is an extension of the silhouette score to the bicluster case. It is a measure of the quality of a biclustering, taking into account the compactness and separation of the biclusters. This vignette provides an overview of the bisilhouette score and how it can be used to evaluate biclustering results.
+
+# Examples 
+
+## Calculate score
+The function `bisilhouette` calculates the bisilhouette score of a biclustering. It takes as input a data matrix `X` ...
+
+## Visualisations
+The function `plot_bisil` produces a visualisation of the bisilhouette scores.  The individual bisilhouette coefficients for each of the rows is shown along the x axis, with rows grouped into the assigned biclusters (denoted by different colours). The mean coefficient is represented by the dashed line. 
+
+For example:
+
+1. Bisilhouette plot for synthetic data with 3 views and 5 biclusters using the true column clusters and 3 out of 5 of the correct row clusters with the remaining row clusters having been reassigned randomly.  
+
+![Synthetic data](shuffled_bisil_plot.pdf)
+
+2. Bisilhouette plot for biclusters obtained from a single cell transcriptomic dataset. 
+
+![Synthetic data](sc_bisil_plot.pdf)
+
+Note that the axes ranges are different as the bisilhouette score is not comporable across distinct datasets.
+
+# Description
+
+## Silhouette score
+The silhouette score \citep{sil} that takes into account compactness and separation of clusters as well as allowing for overlap and non-membership. It considers the average distance between an element and others belonging to the same cluster as well as the average distance to the nearest cluster. 
+
+More specifically, for element $i$ in cluster $k$ the average distance to the other elements in the same cluster is given by $a_{i} =(|R_k|-1)^{-1} \sum_{l \in R_k}d_{il}$, where $d_{jl}$ be the Euclidean distance between row $j$ and row $l$ of a matrix. The average distance to the elements in the next closest cluster is calculated via $b_{i} = \underset{j \in 1:K, j\neq k }{\text{min}}|R_j|^{-1}\sum_{l \in R_j}d_{il}$. The silhouette coefficient $s_{i}$ for element $i$ is defined by $s_{i} =(b_{i} - a_{i})/\operatorname{max}(b_{i},a_{i})$.  A score for each cluster is returned by averaging over the silhouette coefficients corresponding to the elements in the cluster. These are further averaged to give an overall score for the clustering as in equation:
+\begin{equation}\label{eq:sil}
+    S = \frac{1}{K}\sum_{k=1}^{K}\frac{1}{n_k}\sum_{i\in R_k}s_{i}
+\end{equation}
+
+This is illustrated in the following image: 
+
+![Illustration of the distance between an element of a cluster (denoted by red) and: (A) all other elements belonging to the same cluster ($a_i$) and (B) the elements belonging to its closest cluster ($b_i$).](sil_image.pdf)
+
+## Bicluster extension
+To extend the silhouette score to the bicluster case, the silhouette coefficients are calculated for each row in a given bicluster, based only on the columns corresponding to that bicluster. 
+
+The data matrix $X$ is subsetted by the columns belonging to $C_k$, $\tilde{X}=X_{.,C_k}$. Treating ${R_j}$ as the clusters, the silhouette coefficients for the elements of $R_k$ on $\tilde{X}$ are calculated. Averaging over the coefficients, $B_k$ is found as illustrated in the figure below.
+
+
+```{r echo=FALSE, out.width = "30%", fig.align = "center"}
+knitr::include_graphics("bisil_flow.pdf")
+```
+
+![Schematic for the calculation of the bisilhouette score. Matrix $X$ is subsetted by considering the columns belonging to the first bicluster ($C_1$), forming $\tilde{X}$. The silhouette score on $\tilde{X}$ is calculated for the rows belonging to the first bicluster ($R_1$). These values are averaged to give a score for $(R_1, C_1)$.](bisil_flow.pdf)
+
+As with the silhouette score, $B_k$ takes values in $[-1,1]$ with a higher score indicating a more compact and well separated bicluster. A value of 1 is obtained if the columns are constant within the bicluster. Care should be taken as this can be achieved when the columns are constant across all rows, not just those belonging to the bicluster. This issue is prevented by removing features with zero/very low variance. An overall bisilhouette score $B$ for the biclustering $\{(R_k,C_k)\}_{1:K}$ is given by calculating the mean over the non-zero $B_k$. A score of zero is assumed to correspond to an empty bicluster - a non-empty bicluster with score exactly zero is very unlikely for data with any signal present.
+
+The above assumes all $R_k$ and $C_k$ are non-empty and there are at least three unique sets amongst the row clusters. 
+
+### Edge cases
+There are several edge cases to consider when calculating the bisilhouette score.
+
+Suppose the row and column clusters present in a biclustering have been successfully identified, but they are all incorrectly paired. Consider case (i) where there are at least three unique row clusters. In calculating the silhouette score for the first column cluster, the $a_i$ values for this bicluster are likely to be small as these rows do not form part of a bicluster over the columns considered. At least one of the row clusters is also not associated with this column clusters and will likely constitute the next closest bicluster. The $b_i$ values for this bicluster are again likely to be small (similar to the $a_i$ values) and so a small overall score for this bicluster will be returned. Consider case (ii) where there are at maximum two unique row clusters. The $a_i$ values are calculated as before, but as there is only one other row cluster the $b_i$ values correspond to the true row cluster. However, these rows do exhibit different behaviour over the considered columns. This leads to larger $b_i$ values and an inflated overall score, despite the absence of any correctly identified biclusters. Similarly, when the biclusters are simply not informative a similar effect is seen; if there is by chance more variation in the `other' row cluster considered this could cause larger $b_i$ values leading to an inflated score. 
+
+In order to mitigate this effect, when less than three unique row clusters are present, extra row cluster are generated until this is no longer the case.  Each row is randomly assigned to the new row clusters with a probability of $0.1$. The bisilhouette score using this new set of row clusters is calculated. It is worth noting that the generation of additional row clusters is solely for the purpose of the calculation of the bisilhouette score. This process is repeated $10$ times and the average score is reported.
+
+If no biclusters are present a score of 0 is given. This ensures a biclustering with a positive bisilhouette score (at least some separation) will be chosen over an empty biclustering. 
+
+With these edge cases considered, the bisilhouette score can be calculated for any number of biclusters, allowing for comparison between any two sets of biclustering results. This is in contrast to the silhouette score which is only defined for two or more clusters.
+
