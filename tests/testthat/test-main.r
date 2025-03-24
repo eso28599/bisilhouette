@@ -1,4 +1,4 @@
-data <- matrix(stats::rnorm(100), nrow = 10)
+data <- matrix(stats::rnorm(50), nrow = 10)
 # 3 unique biclusters
 row_clustering <- cbind(
   stats::rbinom(10, 1, 0.5),
@@ -6,9 +6,9 @@ row_clustering <- cbind(
   stats::rbinom(10, 1, 0.5)
 )
 col_clustering <- cbind(
-  stats::rbinom(10, 1, 0.5),
-  stats::rbinom(10, 1, 0.5),
-  stats::rbinom(10, 1, 0.5)
+  stats::rbinom(5, 1, 0.5),
+  stats::rbinom(5, 1, 0.5),
+  stats::rbinom(5, 1, 0.5)
 )
 bisil <- bisilhouette(data, row_clustering, col_clustering)
 bisil_plot(data, row_clustering, col_clustering)
@@ -21,9 +21,9 @@ row_clustering <- cbind(
   stats::rbinom(10, 1, 0.5)
 )
 col_clustering <- cbind(
-  stats::rbinom(10, 1, 0.5),
-  stats::rbinom(10, 1, 0.5),
-  stats::rbinom(10, 1, 0.5)
+  stats::rbinom(5, 1, 0.5),
+  stats::rbinom(5, 1, 0.5),
+  stats::rbinom(5, 1, 0.5)
 )
 bisil <- bisilhouette(data, row_clustering, col_clustering)
 bisil_plot(data, row_clustering, col_clustering)
@@ -34,8 +34,8 @@ row_clustering <- cbind(
   stats::rbinom(10, 1, 0.5)
 )
 col_clustering <- cbind(
-  stats::rbinom(10, 1, 0.5),
-  stats::rbinom(10, 1, 0.5)
+  stats::rbinom(5, 1, 0.5),
+  stats::rbinom(5, 1, 0.5)
 )
 bisil <- bisilhouette(data, row_clustering, col_clustering)
 bisil_plot(data, row_clustering, col_clustering)
@@ -45,7 +45,7 @@ row_clustering <- cbind(
   stats::rbinom(10, 1, 0.5)
 )
 col_clustering <- cbind(
-  stats::rbinom(10, 1, 0.5)
+  stats::rbinom(5, 1, 0.5)
 )
 bisil <- bisilhouette(data, row_clustering, col_clustering)
 bisil_plot(data, row_clustering, col_clustering)
