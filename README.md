@@ -3,7 +3,7 @@ Welcome to the Github page for the `bisilhouette` package.
 # Installation 
 To install this package in `r` you can do any of the following
 ```{r}
-devtools::install_packages(bisilhouette) # requires devtools package to be installed
+devtools::install_github("eso28599/bisilhouette") # requires devtools package to be installed
 ```
 
 # Description 
@@ -48,11 +48,16 @@ bisil_plot(data, row_clustering, col_clustering)
 ### Examples
 1. Bisilhouette plot for synthetic data with 3 views and 5 biclusters using the true column clusters and 3 out of 5 of the correct row clusters with the remaining row clusters having been reassigned randomly.  
 
-[Synthetic data](vignettes/shuffled_bisil_plot.png)
+<p align="center">
+  <img src="vignettes/shuffled_bisil_plot.png" width="400"/>
+</p>
 
 2. Bisilhouette plot for biclusters obtained from a single cell transcriptomic dataset. 
 
-[Synthetic data](vignettes/sc_bisil_plot.png)
+<p align="center">
+  <img src="vignettes/sc_bisil_plot.png" width="400"/>
+</p>
+
 
 Note that the axes ranges are different as the bisilhouette score is not comporable across distinct datasets.
 
