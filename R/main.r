@@ -32,7 +32,8 @@ check_unique <- function(row_clustering) {
 #'                   shape(N, n_clusts_row).
 #'
 #' @return bisil: bisilhouette score, float.
-calculate_scores <- function(distances, indices, k, n_clusts_row, clust_two) {
+calculate_scores <- function(distances, indices, k,
+                             n_clusts_row, row_clustering) {
   b_vec <- c()
   # calculate a values
   if (sum(indices) == 1) {
@@ -51,7 +52,7 @@ calculate_scores <- function(distances, indices, k, n_clusts_row, clust_two) {
   t <- 1
   # consider every other cluster
   for (l in other) {
-    oth_ind <- clust_two[, l] == 1
+    oth_ind <- row_clustering[, l] == 1
     if ((sum(oth_ind) == 0) || all(oth_ind == indices)) {
       # if the other cluster is empty,
       # or if the other cluster is the same as the current cluster

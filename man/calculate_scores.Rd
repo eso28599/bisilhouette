@@ -4,7 +4,7 @@
 \alias{calculate_scores}
 \title{Calculate the a and b values for the kth bicluster.}
 \usage{
-calculate_scores(distances, indices, k, n_clusts_row, clust_two)
+calculate_scores(distances, indices, k, n_clusts_row, row_clustering)
 }
 \arguments{
 \item{distances}{distance (over the columns in question) matrix,

@@ -33,11 +33,15 @@ For example:
 
 1. Bisilhouette plot for synthetic data with 3 views and 5 biclusters using the true column clusters and 3 out of 5 of the correct row clusters with the remaining row clusters having been reassigned randomly.  
 
-![Synthetic data](shuffled_bisil_plot.pdf)
+<p align="center">
+  <img src="vignettes/shuffled_bisil_plot.png" width="400"/>
+</p>
 
 2. Bisilhouette plot for biclusters obtained from a single cell transcriptomic dataset. 
 
-![Synthetic data](sc_bisil_plot.pdf)
+<p align="center">
+  <img src="vignettes/sc_bisil_plot.png" width="400"/>
+</p>
 
 Note that the axes ranges are different as the bisilhouette score is not comporable across distinct datasets.
 

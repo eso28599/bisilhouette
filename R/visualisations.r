@@ -62,6 +62,17 @@ y_breaks <- function(lower) {
 #' @export bisil_plot
 #' @return A ggplot object
 bisil_plot <- function(data, row_clusters, col_clusters, filename = NULL) {
+  # remove empty biclusters
+  if (sum(colSums(col_clusters) == 0) > 0) {
+    row_clusters <- row_clusters[, colSums(col_clusters) != 0]
+    col_clusters <- col_clusters[, colSums(col_clusters) != 0]
+    print("Empty biclusters removed.")
+  }
+  # error check
+  if (ncol(col_clusters) == 0) {
+    stop("No biclusters found.")
+  }
+  #
   scores <- calculate_bis(data, row_clusters, col_clusters)
   df <- df_plot(scores$vals)
   breaks_y <- y_breaks(df$y)
@@ -81,7 +92,7 @@ bisil_plot <- function(data, row_clusters, col_clusters, filename = NULL) {
     )) +
     ggplot2::scale_x_continuous(
       breaks = breaks_x,
-      labels = 1:(dim(row_clusters)[2])
+      labels = seq_len(ncol(row_clusters))
     ) +
     ggplot2::scale_color_viridis_c() +
     ggplot2::scale_fill_viridis_c() +
