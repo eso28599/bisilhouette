@@ -18,14 +18,14 @@ This makes `bisilhouette` compatible with the output of functions from the popul
 ```{r}
 data <- matrix(stats::rnorm(100), nrow = 10)
 row_clustering <- cbind(
-  stats::rbinom(100, 1, 0.5),
-  stats::rbinom(100, 1, 0.5),
-  stats::rbinom(100, 1, 0.5)
+  rbinom(100, 1, 0.5),
+  rbinom(100, 1, 0.5),
+  rbinom(100, 1, 0.5)
 )
 col_clustering <- cbind(
-  stats::rbinom(100, 1, 0.5),
-  stats::rbinom(100, 1, 0.5),
-  stats::rbinom(100, 1, 0.5)
+  rbinom(100, 1, 0.5),
+  rbinom(100, 1, 0.5),
+  rbinom(100, 1, 0.5)
 )
 bisil <- bisilhouette(data, row_clustering, col_clustering)
 bisil$bisil # the bisilhouette score
@@ -62,37 +62,21 @@ For data with $100$ samples and $10$ features and $3$ biclusters, possible input
 ```{r}
 # (a)
 row_clustering <- cbind(
-  stats::rbinom(100, 1, 0.5),
-  stats::rbinom(100, 1, 0.5),
-  stats::rbinom(100, 1, 0.5)
+  rbinom(100, 1, 0.5),
+  rbinom(100, 1, 0.5),
+  rbinom(100, 1, 0.5)
 )
 col_clustering <- cbind(
-  stats::rbinom(10, 1, 0.5),
-  stats::rbinom(10, 1, 0.5),
-  stats::rbinom(10, 1, 0.5)
+  rbinom(10, 1, 0.5),
+  rbinom(10, 1, 0.5),
+  rbinom(10, 1, 0.5)
 )
 ```
-
-### biclusters
-
-Alternatively, `biclusters` can be provided which contains either:
-
-(i) A list, the $i^{th}$ element of which is a list of vectors of the row and columns associated with the $i^{th}$ bicluster.
+If `Biclust` is the object returned by the `biclust` function from the `biclust` package, bisilhouette can be used as followed:
 
 ```{r}
-biclusters <- list(list(stats::rbinom(100, 1, 0.5), stats::rbinom(10, 1, 0.5)),
-                   list(stats::rbinom(100, 1, 0.5), stats::rbinom(10, 1, 0.5)),
-                   list(stats::rbinom(100, 1, 0.5), stats::rbinom(10, 1, 0.5))
-)
+bisilhouette(data, Biclust@RowxNumber, Biclust@NumberxCol)
 ```
 
-(ii) A list, the $i^{th}$ element of which is a list of vectors of the row and columns indices associated with the $i^{th}$ bicluster.
-
-```{r}
-biclusters <- list(list(random(100, ), stats::rbinom(10, 1, 0.5)),
-                   list(stats::rbinom(100, 1, 0.5), stats::rbinom(10, 1, 0.5)),
-                   list(stats::rbinom(100, 1, 0.5), stats::rbinom(10, 1, 0.5))
-)
-```
 
 If you use this score in your work please cite: Orme, Ella S.C., Theodoulos Rodosthenous, and Marina Evangelou. "Multi-view biclustering via non-negative matrix tri-factorisation." arXiv e-prints (2025): arXiv-2502.
