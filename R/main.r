@@ -147,10 +147,14 @@ calculate_bis <- function(data, row_clustering,
 #'
 #' @param data data matrix, shape (N, p).
 #' @param row_clustering binary matrix indicating row clustering,
-#'                        shape(N, k).
+#'                       shape(N, k).
 #' @param col_clustering binary matrix indicating column clustering,
-#'                        shape(p, k).
+#'                       shape(p, k).
 #' @param method distance metric to use, str. Default is "euclidean".
+#' @param seed seed if seed should be set for random number generation, int.
+#'             Default is FALSE.
+#' @param n_reps number of repetitions if random biclusters added, int.
+#'               Default is 10.
 #'
 #' @examples
 #' data <- matrix(rnorm(100), nrow = 10)

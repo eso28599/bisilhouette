@@ -23,6 +23,12 @@ shape(N, k).}
 shape(p, k).}
 
 \item{method}{distance metric to use, str. Default is "euclidean".}
+
+\item{seed}{seed if seed should be set for random number generation, int.
+Default is FALSE.}
+
+\item{n_reps}{number of repetitions if random biclusters added, int.
+Default is 10.}
 }
 \value{
 list containing;
