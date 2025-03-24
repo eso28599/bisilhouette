@@ -1,11 +1,3 @@
----
-title: Bisilhouette
-output:
-  html_document: 
-    toc: true
-    number_sections: true
----
-
 Welcome to the Github page for the `bisilhouette` package: an intrinsic biclustering measure.
 
 # Installation 
@@ -36,6 +28,8 @@ col_clustering <- cbind(
   stats::rbinom(100, 1, 0.5)
 )
 bisil <- bisilhouette(data, row_clustering, col_clustering)
+bisil$bisil # the bisilhouette score
+bisil$vals # a list containing vectors of the bisilhouette coefficients for each bicluster 
 ```
 
 ## Visualisation
@@ -47,11 +41,11 @@ bisil_plot(data, row_clustering, col_clustering)
 ### Examples
 1. Bisilhouette plot for synthetic data with 3 views and 5 biclusters using the true column clusters and 3 out of 5 of the correct row clusters with the remaining row clusters having been reassigned randomly.  
 
-![Synthetic data](vignettes/shuffled_bisil_plot.pdf)
+[Synthetic data](vignettes/shuffled_bisil_plot.pdf)
 
 2. Bisilhouette plot for biclusters obtained from a single cell transcriptomic dataset. 
 
-![Synthetic data](vignettes/sc_bisil_plot.pdf)
+[Synthetic data](vignettes/sc_bisil_plot.pdf)
 
 Note that the axes ranges are different as the bisilhouette score is not comporable across distinct datasets.
 
@@ -101,5 +95,4 @@ biclusters <- list(list(random(100, ), stats::rbinom(10, 1, 0.5)),
 )
 ```
 
-Please cite: 
-add to description?
+If you use this score in your work please cite: Orme, Ella S.C., Theodoulos Rodosthenous, and Marina Evangelou. "Multi-view biclustering via non-negative matrix tri-factorisation." arXiv e-prints (2025): arXiv-2502.
