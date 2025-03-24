@@ -9,7 +9,7 @@ devtools::install_github("eso28599/bisilhouette") # requires devtools package to
 # Description 
 The bisilhouette score is an extension of the silhouette score to the bicluster case. It is a measure of the quality of a biclustering, which like the silhouette score takes into account the compactness and separation of the biclusters.
 
-This page details the use of the functions within the `bisilhouette` function, for more details on the definiton of the score, please see the ..... (add link?)
+This page details the use of the functions within the `bisilhouette` function, for more details on the definiton of the score, please see the [package vignette](vignettes/res.Rmd).
 
 # Examples 
 We ilustrate the use of the `bisilhouette` function which takes as input the $N\times p$ `data` matrix, and bicluster membership informtation encoded via `row_clustering` and `col_clustering`.  
