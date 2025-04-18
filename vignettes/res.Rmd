@@ -34,13 +34,13 @@ For example:
 1. Bisilhouette plot for synthetic data with 3 views and 5 biclusters using the true column clusters and 3 out of 5 of the correct row clusters with the remaining row clusters having been reassigned randomly.  
 
 <p align="center">
-  <img src="vignettes/shuffled_bisil_plot.png" width="400"/>
+  <img src="shuffled_bisil_plot.png" width="400"/>
 </p>
 
 2. Bisilhouette plot for biclusters obtained from a single cell transcriptomic dataset. 
 
 <p align="center">
-  <img src="vignettes/sc_bisil_plot.png" width="400"/>
+  <img src="sc_bisil_plot.png" width="400"/>
 </p>
 
 Note that the axes ranges are different as the bisilhouette score is not comporable across distinct datasets.
@@ -57,7 +57,9 @@ More specifically, for element $i$ in cluster $k$ the average distance to the ot
 
 This is illustrated in the following image: 
 
-![Illustration of the distance between an element of a cluster (denoted by red) and: (A) all other elements belonging to the same cluster ($a_i$) and (B) the elements belonging to its closest cluster ($b_i$).](sil_image.pdf)
+<p align="center">
+  <img src="sil_image.png" width="400"/>
+</p>
 
 ## Bicluster extension
 To extend the silhouette score to the bicluster case, the silhouette coefficients are calculated for each row in a given bicluster, based only on the columns corresponding to that bicluster. 
@@ -65,11 +67,9 @@ To extend the silhouette score to the bicluster case, the silhouette coefficient
 The data matrix $X$ is subsetted by the columns belonging to $C_k$, $\tilde{X}=X_{.,C_k}$. Treating ${R_j}$ as the clusters, the silhouette coefficients for the elements of $R_k$ on $\tilde{X}$ are calculated. Averaging over the coefficients, $B_k$ is found as illustrated in the figure below.
 
 
-```{r echo=FALSE, out.width = "30%", fig.align = "center"}
-knitr::include_graphics("bisil_flow.pdf")
-```
-
-![Schematic for the calculation of the bisilhouette score. Matrix $X$ is subsetted by considering the columns belonging to the first bicluster ($C_1$), forming $\tilde{X}$. The silhouette score on $\tilde{X}$ is calculated for the rows belonging to the first bicluster ($R_1$). These values are averaged to give a score for $(R_1, C_1)$.](bisil_flow.pdf)
+<p align="center">
+  <img src="bisil_flow.png" width="600"/>
+</p>
 
 As with the silhouette score, $B_k$ takes values in $[-1,1]$ with a higher score indicating a more compact and well separated bicluster. A value of 1 is obtained if the columns are constant within the bicluster. Care should be taken as this can be achieved when the columns are constant across all rows, not just those belonging to the bicluster. This issue is prevented by removing features with zero/very low variance. An overall bisilhouette score $B$ for the biclustering $\{(R_k,C_k)\}_{1:K}$ is given by calculating the mean over the non-zero $B_k$. A score of zero is assumed to correspond to an empty bicluster - a non-empty bicluster with score exactly zero is very unlikely for data with any signal present.
 
