@@ -3,7 +3,7 @@ Title: Calculate the bisilhouette of a biclustering
 Version: 0.0.0.9000
 Authors@R: 
     person("Ella", "Orme", , "ellaorme18@imperial.ac.uk", role = c("aut", "cre"))
-Description: The bisilhouette score is an extension of the silhouette score to the bicluster case. This means the score an intrinsic biclustering measure which takes into account both the compactness and separateness of biclusters.This package can be used to calculate the bisilhouette score of a biclustering. Similarly to the silhouette score, it also can be used to produce a visualisation plot (using the `bisil_plot` function). 
+Description: The bisilhouette score is an extension of the silhouette score to the bicluster case. The score is an intrinsic biclustering measure which takes into account both the compactness and separateness of biclusters. Similarly to the silhouette score, the bisilhouette score can be used to produce a visualisation plot. 
 License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)

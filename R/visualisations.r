@@ -6,6 +6,8 @@
 #' @description Function to create a data frame for
 #'              plotting from bisilhouette coefficients.
 #' @param values A list of bisilhouette scores.
+#'
+#' @noRd
 #' @return A data frame for plotting.
 df_plot <- function(values) {
   x <- c()
@@ -23,6 +25,8 @@ df_plot <- function(values) {
 #' @title X breaks
 #' @description Function to determine the breaks for the x-axis.
 #' @param df A data frame of bisilhouette scores.
+#'
+#' @noRd
 #' @return A vector of breaks for the x-axis.
 x_breaks <- function(df) {
   n_c <- length(unique(df$clust))
@@ -38,6 +42,8 @@ x_breaks <- function(df) {
 #' @title Break function
 #' @description Function to determine the breaks for the y-axis.
 #' @param lower A vector of the lower values of the bisilhouette scores.
+#'
+#' @noRd
 #' @return A vector of breaks for the y-axis.
 y_breaks <- function(lower) {
   if (min(lower) < 0) {
@@ -59,8 +65,8 @@ y_breaks <- function(lower) {
 #' row_clusters <- matrix(rbinom(10, 1, 0.5), nrow = 10)
 #' col_clusters <- matrix(rbinom(10, 1, 0.5), nrow = 10)
 #' bisil_plot(data, row_clusters, col_clusters)
-#' @export bisil_plot
 #' @return A ggplot object
+#' @export bisil_plot
 bisil_plot <- function(data, row_clusters, col_clusters, filename = NULL) {
   # remove empty biclusters
   if (sum(colSums(col_clusters) == 0) > 0) {

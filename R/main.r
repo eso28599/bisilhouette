@@ -3,6 +3,7 @@
 #' @param row_clustering binary matrix indicating row clustering,
 #'                        shape(N, k).
 #'
+#' @noRd
 #' @return TRUE if there are not at least three unique row clusters, bool.
 check_unique <- function(row_clustering) {
   if (sum(colSums(row_clustering) != 0) < 3) {
@@ -31,6 +32,7 @@ check_unique <- function(row_clustering) {
 #' @param clust_two binary matrix indicating row clustering,
 #'                   shape(N, n_clusts_row).
 #'
+#' @noRd
 #' @return bisil: bisilhouette score, float.
 calculate_scores <- function(distances, indices, k,
                              n_clusts_row, row_clustering) {
@@ -93,7 +95,7 @@ calculate_scores <- function(distances, indices, k,
 #' @param col_clustering binary matrix indicating column clustering,
 #'                        shape(p, K).
 #' @param method distance metric to use, str. Default is "euclidean".
-#'
+#' @noRd
 #'
 #' @return list containing;
 #'             - bisil: bisilhouette score, float.

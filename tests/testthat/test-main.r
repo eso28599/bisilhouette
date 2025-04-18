@@ -25,6 +25,13 @@ col_clustering <- cbind(
   stats::rbinom(5, 1, 0.5),
   stats::rbinom(5, 1, 0.5)
 )
+while (sum(col_clustering) == 0) {
+  col_clustering <- cbind(
+    stats::rbinom(5, 1, 0.5),
+    stats::rbinom(5, 1, 0.5),
+    stats::rbinom(5, 1, 0.5)
+  )
+}
 bisil <- bisilhouette(data, row_clustering, col_clustering)
 bisil_plot(data, row_clustering, col_clustering)
 
@@ -37,6 +44,12 @@ col_clustering <- cbind(
   stats::rbinom(5, 1, 0.5),
   stats::rbinom(5, 1, 0.5)
 )
+while (sum(col_clustering) == 0) {
+  col_clustering <- cbind(
+    stats::rbinom(5, 1, 0.5),
+    stats::rbinom(5, 1, 0.5)
+  )
+}
 bisil <- bisilhouette(data, row_clustering, col_clustering)
 bisil_plot(data, row_clustering, col_clustering)
 
@@ -47,5 +60,10 @@ row_clustering <- cbind(
 col_clustering <- cbind(
   stats::rbinom(5, 1, 0.5)
 )
+while (sum(col_clustering) == 0) {
+  col_clustering <- cbind(
+    stats::rbinom(5, 1, 0.5)
+  )
+}
 bisil <- bisilhouette(data, row_clustering, col_clustering)
 bisil_plot(data, row_clustering, col_clustering)
