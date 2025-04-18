@@ -160,18 +160,18 @@ calculate_bis <- function(data, row_clustering,
 #'               Default is 10.
 #'
 #' @examples
-#' data <- matrix(rnorm(100), nrow = 10)
+#' data <- matrix(stats::rnorm(50), nrow = 10)
 #' row_clustering <- cbind(
 #'   stats::rbinom(10, 1, 0.5),
 #'   stats::rbinom(10, 1, 0.5),
 #'   stats::rbinom(10, 1, 0.5)
 #' )
 #' col_clustering <- cbind(
-#'   stats::rbinom(10, 1, 0.5),
-#'   stats::rbinom(10, 1, 0.5),
-#'   stats::rbinom(10, 1, 0.5)
+#'   stats::rbinom(5, 1, 0.5),
+#'   stats::rbinom(5, 1, 0.5),
+#'   stats::rbinom(5, 1, 0.5)
 #' )
-#' bisilhouette(data, row_clustering, col_clustering)
+#' bisilouette(data, row_clustering, col_clustering)
 #' @export
 #' @return list containing;
 #'              - bisil: bisilhouette score, float.

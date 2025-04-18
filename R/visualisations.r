@@ -61,10 +61,18 @@ y_breaks <- function(lower) {
 #' @param filename The filename to save the plot,
 #'                 if NULL the plot is not saved. Default is NULL.
 #' @examples
-#' data <- matrix(rnorm(100), nrow = 10)
-#' row_clusters <- matrix(rbinom(10, 1, 0.5), nrow = 10)
-#' col_clusters <- matrix(rbinom(10, 1, 0.5), nrow = 10)
-#' bisil_plot(data, row_clusters, col_clusters)
+#' data <- matrix(stats::rnorm(50), nrow = 10)
+#' row_clustering <- cbind(
+#'   stats::rbinom(10, 1, 0.5),
+#'   stats::rbinom(10, 1, 0.5),
+#'   stats::rbinom(10, 1, 0.5)
+#' )
+#' col_clustering <- cbind(
+#'   stats::rbinom(5, 1, 0.5),
+#'   stats::rbinom(5, 1, 0.5),
+#'   stats::rbinom(5, 1, 0.5)
+#' )
+#' bisil_plot(data, row_clustering, col_clustering)
 #' @return A ggplot object
 #' @export bisil_plot
 bisil_plot <- function(data, row_clusters, col_clusters, filename = NULL) {
