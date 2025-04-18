@@ -1,8 +1,9 @@
 Welcome to the Github page for the `bisilhouette` package.
 
 # Installation 
-To install this package in `r` you can do any of the following
-```{r}
+To install this package in `r` you can do the following:
+
+```
 devtools::install_github("eso28599/bisilhouette") # requires devtools package to be installed
 ```
 
@@ -14,10 +15,10 @@ This page details the use of the functions within the `bisilhouette` function, f
 # Examples 
 We ilustrate the use of the `bisilhouette` function which takes as input the $N\times p$ `data` matrix, and bicluster membership informtation encoded via `row_clustering` and `col_clustering`.  
 
-* `row_clustering`  is a Logical Matrix which contains 1 in [i,j] if row i is in bicluster j
-* `col_clustering`  is a Logical Matrix which contains 1 in [i,j] if column i is in bicluster j
+* `row_clustering`  is a binary matrix which contains 1 in element [i,j] if row i is in bicluster j
+* `col_clustering`  is a binary matrix which contains 1 in element [i,j] if column i is in bicluster j
 
-```{r}
+```
 data <- matrix(rnorm(50), nrow = 10)
 row_clustering <- cbind(
   rbinom(10, 1, 0.5),
@@ -35,13 +36,15 @@ bisil$vals # a list containing vectors of the bisilhouette coefficients for each
 ```
 
 The `bisilhouette` package is compatible with the output of functions from the popular `biclust`package; if `Biclust` is the object returned by the `biclust` function from the `biclust` package, bisilhouette can be used as followed:
-```{r}
+
+```
 bisilhouette(data, Biclust@RowxNumber, Biclust@NumberxCol)
 ```
 
 ## Visualisation
 The function `plot_bisil` produces a visualisation of the bisilhouette scores.  The individual bisilhouette coefficients for each of the rows is shown along the x axis, with rows grouped into the assigned biclusters (denoted by different colours). The mean coefficient is represented by the dashed line. 
-```{r}
+
+```
 bisil_plot(data, row_clustering, col_clustering)
 ```
 

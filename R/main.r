@@ -171,7 +171,7 @@ calculate_bis <- function(data, row_clustering,
 #'   stats::rbinom(5, 1, 0.5),
 #'   stats::rbinom(5, 1, 0.5)
 #' )
-#' bisilouette(data, row_clustering, col_clustering)
+#' bisilhouette(data, row_clustering, col_clustering)
 #' @export
 #' @return list containing;
 #'              - bisil: bisilhouette score, float.
