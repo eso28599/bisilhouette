@@ -1,3 +1,5 @@
 ^bisilhouette$
 ^docs$
 ^pkgdown$
+^\.github$
+^_pkgdown\.yml$

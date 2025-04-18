@@ -15,6 +15,6 @@ Suggests:
     rmarkdown,
     testthat (>= 3.0.0)
 VignetteBuilder: knitr
-URL: https://github.com/eso28599/bisilhouette
+URL: https://github.com/eso28599/bisilhouette, https://eso28599.github.io/bisilhouette/
 BugReports: https://github.com/eso28599/bisilhouette/issues
 Config/testthat/edition: 3

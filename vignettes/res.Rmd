@@ -24,7 +24,7 @@ The bisilhouette score is an extension of the silhouette score to the bicluster 
 # Examples 
 
 ## Calculate score
-The function `bisilhouette` calculates the bisilhouette score of a biclustering. It takes as input a data matrix `X` ...
+The function `bisilhouette` calculates the bisilhouette score of a biclustering. See the package landing page for more details on the input parameters.
 
 ## Visualisations
 The function `plot_bisil` produces a visualisation of the bisilhouette scores.  The individual bisilhouette coefficients for each of the rows is shown along the x axis, with rows grouped into the assigned biclusters (denoted by different colours). The mean coefficient is represented by the dashed line. 
