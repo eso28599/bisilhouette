@@ -127,13 +127,17 @@ the average distance to the other elements in the same cluster is given
 by
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>a</mi><mi>i</mi></msub><mo>=</mo><msup><mrow><mo stretchy="true" form="prefix">(</mo><mrow><mo stretchy="true" form="prefix">|</mo><msub><mi>R</mi><mi>k</mi></msub><mo stretchy="true" form="postfix">|</mo></mrow><mo>−</mo><mn>1</mn><mo stretchy="true" form="postfix">)</mo></mrow><mrow><mo>−</mo><mn>1</mn></mrow></msup><msub><mo>∑</mo><mrow><mi>l</mi><mo>∈</mo><msub><mi>R</mi><mi>k</mi></msub></mrow></msub><msub><mi>d</mi><mrow><mi>i</mi><mi>l</mi></mrow></msub></mrow><annotation encoding="application/x-tex">a_{i} =(|R_k|-1)^{-1} \sum_{l \in R_k}d_{il}</annotation></semantics></math>,
 where
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>d</mi><mrow><mi>j</mi><mi>l</mi></mrow></msub><annotation encoding="application/x-tex">d_{jl}</annotation></semantics></math>
-be the Euclidean distance between row
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>j</mi><annotation encoding="application/x-tex">j</annotation></semantics></math>
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>d</mi><mrow><mi>i</mi><mi>l</mi></mrow></msub><annotation encoding="application/x-tex">d_{il}</annotation></semantics></math>
+is the Euclidean distance between row
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>i</mi><annotation encoding="application/x-tex">i</annotation></semantics></math>
 and row
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>l</mi><annotation encoding="application/x-tex">l</annotation></semantics></math>
-of a matrix. The average distance to the elements in the next closest
-cluster is calculated via
+of a matrix and
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>R</mi><mi>k</mi></msub><annotation encoding="application/x-tex">R_k</annotation></semantics></math>
+is the sets of rows belonging to cluster
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>k</mi><annotation encoding="application/x-tex">k</annotation></semantics></math>.
+The average distance to the elements in the next closest cluster is
+calculated via
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>b</mi><mi>i</mi></msub><mo>=</mo><munder><mtext mathvariant="normal">min</mtext><mrow><mi>j</mi><mo>∈</mo><mn>1</mn><mo>:</mo><mi>K</mi><mo>,</mo><mi>j</mi><mo>≠</mo><mi>k</mi></mrow></munder><msup><mrow><mo stretchy="true" form="prefix">|</mo><msub><mi>R</mi><mi>j</mi></msub><mo stretchy="true" form="postfix">|</mo></mrow><mrow><mo>−</mo><mn>1</mn></mrow></msup><msub><mo>∑</mo><mrow><mi>l</mi><mo>∈</mo><msub><mi>R</mi><mi>j</mi></msub></mrow></msub><msub><mi>d</mi><mrow><mi>i</mi><mi>l</mi></mrow></msub></mrow><annotation encoding="application/x-tex">b_{i} = \underset{j \in 1:K, j\neq k }{\text{min}}|R_j|^{-1}\sum_{l \in R_j}d_{il}</annotation></semantics></math>.
 The silhouette coefficient
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>s</mi><mi>i</mi></msub><annotation encoding="application/x-tex">s_{i}</annotation></semantics></math>
@@ -143,8 +147,9 @@ is defined by
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>s</mi><mi>i</mi></msub><mo>=</mo><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>b</mi><mi>i</mi></msub><mo>−</mo><msub><mi>a</mi><mi>i</mi></msub><mo stretchy="true" form="postfix">)</mo></mrow><mi>/</mi><mo>max</mo><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>b</mi><mi>i</mi></msub><mo>,</mo><msub><mi>a</mi><mi>i</mi></msub><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">s_{i} =(b_{i} - a_{i})/\operatorname{max}(b_{i},a_{i})</annotation></semantics></math>.
 A score for each cluster is returned by averaging over the silhouette
 coefficients corresponding to the elements in the cluster. These are
-further averaged to give an overall score for the clustering as in
-equation:
+further averaged to give an overall score,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>S</mi><annotation encoding="application/x-tex">S</annotation></semantics></math>
+for the clustering:
 <math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>S</mi><mo>=</mo><mfrac><mn>1</mn><mi>K</mi></mfrac><munderover><mo>∑</mo><mrow><mi>k</mi><mo>=</mo><mn>1</mn></mrow><mi>K</mi></munderover><mfrac><mn>1</mn><msub><mi>n</mi><mi>k</mi></msub></mfrac><munder><mo>∑</mo><mrow><mi>i</mi><mo>∈</mo><msub><mi>R</mi><mi>k</mi></msub></mrow></munder><msub><mi>s</mi><mi>i</mi></msub></mrow><annotation encoding="application/x-tex">\begin{equation}\label{eq:sil}
     S = \frac{1}{K}\sum_{k=1}^{K}\frac{1}{n_k}\sum_{i\in R_k}s_{i}
 \end{equation}</annotation></semantics></math></p>
