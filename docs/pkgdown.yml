@@ -1,0 +1,6 @@
+pandoc: 3.6.4
+pkgdown: 2.1.1
+pkgdown_sha: ~
+articles:
+  res: res.html
+last_built: 2025-04-18T11:26Z
