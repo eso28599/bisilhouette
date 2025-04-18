@@ -19,7 +19,7 @@ jobs:
 
       - name: Install dependencies
         run: |
-          install.packages('remotes')
+          install.packages(remotes)
           remotes::install_cran('pkgdown')
 
       - name: Build and deploy pkgdown site
