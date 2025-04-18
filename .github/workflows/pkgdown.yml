@@ -23,8 +23,8 @@ jobs:
           sudo apt-get install -y libcurl4-openssl-dev libfontconfig1-dev pkg-config
       - name: Install dependencies
         run: |
+          Rscript -e "install.packages('textshaping')"
           Rscript -e "install.packages('remotes')"
-          Rscript -e "install.packages("textshaping")"
           Rscript -e "remotes::install_cran('pkgdown')"
 
       - name: Build and deploy pkgdown site
