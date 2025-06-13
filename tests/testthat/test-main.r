@@ -12,6 +12,10 @@ col_clustering <- cbind(
 )
 bisil <- bisilhouette(data, row_clustering, col_clustering)
 bisil_plot(data, row_clustering, col_clustering)
+bisil_cos <- bisilhouette(
+  data, row_clustering, col_clustering,
+  method = "cosine"
+)
 
 # 3 biclusters, 2 unique rows
 rep_row <- stats::rbinom(10, 1, 0.5)

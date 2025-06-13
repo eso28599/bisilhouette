@@ -128,7 +128,10 @@ calculate_bis <- function(data, row_clustering,
     } else {
       # subset data using column cluster k
       new_data <- data[, (col_clustering[, k] == 1)]
-      distances <- as.matrix(stats::dist(new_data, method))
+      distances <- suppressMessages(philentropy::distance(
+        as.matrix(new_data),
+        method
+      ))
       # calculate scores
       scores <- calculate_scores(
         distances, indices, k,
