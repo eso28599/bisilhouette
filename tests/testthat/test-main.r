@@ -48,7 +48,11 @@ col_clustering <- cbind(
   stats::rbinom(5, 1, 0.5),
   stats::rbinom(5, 1, 0.5)
 )
-while (sum(col_clustering) == 0) {
+while (sum(col_clustering) == 0 || sum(row_clustering) == 0) {
+  row_clustering <- cbind(
+    stats::rbinom(10, 1, 0.5),
+    stats::rbinom(10, 1, 0.5)
+  )
   col_clustering <- cbind(
     stats::rbinom(5, 1, 0.5),
     stats::rbinom(5, 1, 0.5)
