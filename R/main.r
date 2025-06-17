@@ -129,7 +129,7 @@ calculate_bis <- function(data, row_clustering,
       # subset data using column cluster k
       new_data <- data[, (col_clustering[, k] == 1)]
       if (method == "cosine") {
-        distances <- lsa::cosine(t(as.matrix(new_data)))
+        distances <- 1 - lsa::cosine(t(as.matrix(new_data)))
       } else {
         distances <- as.matrix(stats::dist(new_data, method))
       }

@@ -16,7 +16,6 @@ bisil_cos <- bisilhouette(
   data, row_clustering, col_clustering,
   method = "cosine"
 )
-
 # 3 biclusters, 2 unique rows
 rep_row <- stats::rbinom(10, 1, 0.5)
 row_clustering <- cbind(
