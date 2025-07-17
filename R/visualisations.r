@@ -47,9 +47,10 @@ x_breaks <- function(df) {
 #' @return A vector of breaks for the y-axis.
 y_breaks <- function(lower) {
   if (min(lower) < 0) {
-    return(seq(-1, 1, 0.2)[seq(-1, 1, 0.2) > (min(lower) - 0.2)])
+    return(seq(-1, 1, 0.2)[(seq(-1, 1, 0.2) > (min(lower) - 0.2)) &
+      (seq(-1, 1, 0.2) < (max(lower) + 0.2))])
   } else {
-    return(seq(0, 1, 0.2))
+    return(seq(0, 1, 0.2)[(seq(0, 1, 0.2) < (max(lower) + 0.2))])
   }
 }
 
@@ -63,6 +64,8 @@ y_breaks <- function(lower) {
 #' @param method The distance method to use for calculating
 #'               the bisilhouette score.
 #'               Default is "euclidean".
+#' @param h Height of the plot in inches, default is 6.
+#' @param w Width of the plot in inches, default is 6.
 #' @examples
 #' data <- matrix(stats::rnorm(50), nrow = 10)
 #' row_clustering <- cbind(
@@ -80,7 +83,7 @@ y_breaks <- function(lower) {
 #' @export bisil_plot
 bisil_plot <- function(
     data, row_clusters, col_clusters,
-    filename = NULL, method = "euclidean") {
+    filename = NULL, method = "euclidean", h = 6, w = 6) {
   # remove empty biclusters
   if (sum(colSums(col_clusters) == 0) > 0) {
     row_clusters <- row_clusters[, colSums(col_clusters) != 0]
@@ -131,7 +134,7 @@ bisil_plot <- function(
     )
 
   if (!is.null(filename)) {
-    ggplot2::ggsave(filename, p)
+    ggplot2::ggsave(filename, p, height = h, width = w)
   }
   return(p)
 }

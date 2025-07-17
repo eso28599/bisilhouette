@@ -9,7 +9,9 @@ bisil_plot(
   row_clusters,
   col_clusters,
   filename = NULL,
-  method = "euclidean"
+  method = "euclidean",
+  h = 6,
+  w = 6
 )
 }
 \arguments{
@@ -25,6 +27,10 @@ if NULL the plot is not saved. Default is NULL.}
 \item{method}{The distance method to use for calculating
 the bisilhouette score.
 Default is "euclidean".}
+
+\item{h}{Height of the plot in inches, default is 6.}
+
+\item{w}{Width of the plot in inches, default is 6.}
 }
 \value{
 A ggplot object
