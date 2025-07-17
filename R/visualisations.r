@@ -60,6 +60,9 @@ y_breaks <- function(lower) {
 #' @param col_clusters A matrix of column cluster indices (p x k).
 #' @param filename The filename to save the plot,
 #'                 if NULL the plot is not saved. Default is NULL.
+#' @param method The distance method to use for calculating
+#'               the bisilhouette score.
+#'               Default is "euclidean".
 #' @examples
 #' data <- matrix(stats::rnorm(50), nrow = 10)
 #' row_clustering <- cbind(
@@ -75,7 +78,9 @@ y_breaks <- function(lower) {
 #' bisil_plot(data, row_clustering, col_clustering)
 #' @return A ggplot object
 #' @export bisil_plot
-bisil_plot <- function(data, row_clusters, col_clusters, filename = NULL) {
+bisil_plot <- function(
+    data, row_clusters, col_clusters,
+    filename = NULL, method = "euclidean") {
   # remove empty biclusters
   if (sum(colSums(col_clusters) == 0) > 0) {
     row_clusters <- row_clusters[, colSums(col_clusters) != 0]
@@ -87,7 +92,7 @@ bisil_plot <- function(data, row_clusters, col_clusters, filename = NULL) {
     stop("No biclusters found.")
   }
   #
-  scores <- calculate_bis(data, row_clusters, col_clusters)
+  scores <- calculate_bis(data, row_clusters, col_clusters, method = method)
   df <- df_plot(scores$vals)
   breaks_y <- y_breaks(df$y)
   breaks_x <- x_breaks(df)

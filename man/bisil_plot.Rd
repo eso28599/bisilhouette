@@ -4,7 +4,13 @@
 \alias{bisil_plot}
 \title{Bisilhouette plot}
 \usage{
-bisil_plot(data, row_clusters, col_clusters, filename = NULL)
+bisil_plot(
+  data,
+  row_clusters,
+  col_clusters,
+  filename = NULL,
+  method = "euclidean"
+)
 }
 \arguments{
 \item{data}{A matrix of data (n x p).}
@@ -15,6 +21,10 @@ bisil_plot(data, row_clusters, col_clusters, filename = NULL)
 
 \item{filename}{The filename to save the plot,
 if NULL the plot is not saved. Default is NULL.}
+
+\item{method}{The distance method to use for calculating
+the bisilhouette score.
+Default is "euclidean".}
 }
 \value{
 A ggplot object
