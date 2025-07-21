@@ -202,6 +202,9 @@ bisilhouette <- function(data, row_clustering, col_clustering,
   # repeat if necessary
   if (results$rep) {
     for (i in 1:(n_reps - 1)) {
+      if (n_reps == 1) {
+        next
+      }
       res_rep <- calculate_bis(
         data, row_clustering,
         col_clustering, method
@@ -213,7 +216,7 @@ bisilhouette <- function(data, row_clustering, col_clustering,
       )
     }
     bisil <- bisil / n_reps
-    vals <- lapply(vals, function(x) x / 10)
+    vals <- lapply(vals, function(x) x / n_reps)
   }
   return(list("bisil" = bisil, "vals" = vals))
 }
